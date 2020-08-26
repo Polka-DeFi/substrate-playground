@@ -6,6 +6,7 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-methods: "GET, OPTIONS"
+    #nginx.ingress.kubernetes.io/use-regex: "true"
     # nginx.ingress.kubernetes.io/configuration-snippet: |
     #  rewrite_log on;
     #  location ~ /front-end/.* {
@@ -16,11 +17,15 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /grafana
         backend:
-          serviceName: backend-ui-service
-          servicePort: 80
+          serviceName: grafana-service
+          servicePort: 3000
       - path: /api
         backend:
           serviceName: backend-api-service
           servicePort: 80
+#      - path: /grafana/
+#        backend:
+#          serviceName: grafana-service
+#          servicePort: 3000
