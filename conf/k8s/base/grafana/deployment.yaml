@@ -11,6 +11,9 @@ spec:
       maxUnavailable: 1
     type: RollingUpdate
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: grafana
     spec:
       containers:
         - image: grafana/grafana
@@ -40,6 +43,16 @@ spec:
               value: "%(protocol)s://%(domain)s:%(http_port)s/grafana/"
             - name: GF_SERVER_STATIC_ROOT_PATH
               value: "public"
+            - name: GF_SECURITY_ALLOW_EMBEDDING
+              value: "true"
+            - name: GF_AUTH_DISABLE_LOGIN_FORM
+              value: "true"
+            - name: GF_AUTH_ANONYMOUS_ENABLED
+              value: "true"
+            #- name: GF_AUTH_ANONYMOUS_ORG_NAME
+            #  value: "Playground"
+            - name: GF_AUTH_ANONYMOUS_ORG_ROLE
+              value: "Viewer"
       restartPolicy: Always
   #    volumes:
    #     - emptyDir: {}

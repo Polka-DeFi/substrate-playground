@@ -17,15 +17,19 @@ spec:
   rules:
   - http:
       paths:
-      - path: /grafana
+      - path: /
         backend:
-          serviceName: grafana-service
-          servicePort: 3000
+          serviceName: backend-ui-service
+          servicePort: backend-ui-port
       - path: /api
         backend:
           serviceName: backend-api-service
-          servicePort: 80
-#      - path: /grafana/
-#        backend:
-#          serviceName: grafana-service
-#          servicePort: 3000
+          servicePort: backend-api-port
+      - path: /grafana
+        backend:
+          serviceName: grafana-service
+          servicePort: grafana-port
+      - path: /prometheus
+        backend:
+          serviceName: prometheus-service
+          servicePort: prometheus-port

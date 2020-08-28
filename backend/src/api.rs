@@ -106,7 +106,7 @@ fn result_to_jsonrpc<T: Serialize>(res: Result<T, String>) -> JsonValue {
 #[get("/")]
 pub fn get(state: State<'_, Context>, user: User) -> JsonValue {
     let manager = state.manager.clone();
-    result_to_jsonrpc(manager.get_logged(user))
+    result_to_jsonrpc(manager.get(user))
 }
 
 #[get("/<instance_uuid>")]
